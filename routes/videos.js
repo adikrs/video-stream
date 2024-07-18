@@ -1,8 +1,14 @@
 import express from "express";
-import { getVideos } from "../controllers/video.js";
+import { createVideo } from "../controllers/video.js";
+import { verifyToken } from "../verifyToken.js";
 
 const router  = express.Router();
 
-router.get("/test",getVideos)
+//create video
+router.post("/",verifyToken,createVideo);
+
+//get video
+
+
 
 export default router;
