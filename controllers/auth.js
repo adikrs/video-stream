@@ -1,4 +1,4 @@
-import User from "../models/Users.js"
+import User from "../models/User.js"
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { addUserError } from "../error.js";
