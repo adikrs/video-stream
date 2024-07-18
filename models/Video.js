@@ -37,6 +37,10 @@ const VideoSchema = new mongoose.Schema({
         type:[String],
         default:[],
     },
+    category:{
+        type:String,
+        default:[],
+    },
     isBanned:{
         type:Boolean,
         default:false

@@ -90,3 +90,38 @@ export const deleteVideo = async (req,res,next)=> {
         next(err);
     }
 }
+
+
+export const addView = async (req,res,next)=> {
+    try{
+        
+        await Video.findByIdAndUpdate(req.params.id,{
+            $inc:{views:1}
+        })
+        res.status(200).json("View is increased by 1");
+    }catch(err)
+    {
+        next(err);
+    }
+}
+
+export const getAllCategoryVideos = async (req,res,next)=> {
+    try{
+        const videos = await Video.find({category:req.params.id});
+        console.log(videos);
+        res.status(200).json(videos);
+    }catch(err)
+    {
+        next(err);
+    }
+}
+
+export const getSearchVideos = async (req,res,next)=> {
+    try{
+        const videos = await Video.find({title:{$regex : req.params.id}});
+        res.status(200).json(videos);
+    }catch(err)
+    {
+        next(err);
+    }
+}

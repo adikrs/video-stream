@@ -1,5 +1,5 @@
 import express from "express";
-import { createVideo, deleteVideo, updateVideo,getVideo,getAllVideos } from "../controllers/video.js";
+import { createVideo, deleteVideo, updateVideo,getVideo,getAllVideos,addView,getAllCategoryVideos,getSearchVideos } from "../controllers/video.js";
 import { verifyToken } from "../verifyToken.js";
 
 const router  = express.Router();
@@ -18,6 +18,16 @@ router.delete("/:id",verifyToken,deleteVideo);
 
 //get all videos
 router.get("/find/",verifyToken,getAllVideos);
+
+//update views
+router.put("/views/:id",verifyToken,addView);
+
+//get videos by category
+router.get("/find/category/:id",verifyToken,getAllCategoryVideos);
+
+//get by search
+router.get("/find/search/:id",verifyToken,getSearchVideos);
+
 
 
 
