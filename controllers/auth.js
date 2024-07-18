@@ -1,8 +1,8 @@
 import User from "../models/User.js"
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { addUserError } from "../error.js";
 import jwt from "jsonwebtoken";
+import { addError } from "../error.js";
 
 export const signup = async (req,res,next)=> {
 try{
@@ -17,7 +17,7 @@ try{
         res.status(200).send("user sign up successfull");
 
     }catch(err){
-        next(addUserError(500,"not able to create !"));
+        next(addError(500,"not able to create !"));
     }
 }
 
@@ -29,7 +29,7 @@ export const login = async (req,res,next)=> {
             const user = await User.findOne({username:req.body.username})
             if(!user)
             {
-                return next(addUserError(404," User not present! Please check the username."))
+                return next(addError(404," User not present! Please check the username."))
             }
 
             // password check
@@ -40,7 +40,7 @@ export const login = async (req,res,next)=> {
 
             if(!isPasswordCorrect)
             {
-                return next(addUserError(400," Password is wrong! Please enter again."))
+                return next(addError(400," Password is wrong! Please enter again."))
             }
 
             console.log("User sign it successfull")
@@ -59,17 +59,3 @@ export const login = async (req,res,next)=> {
         }
         
     }
-
-// //string hashing
-// // govi
-// MOD=10^9+7;
-// int p=31;
-// int hash=0;
-// for(int i=0;i<signup.length();i++)
-// {
-//     hash+=(s[i]-'a')*p;
-
-//     p*=p;
-// }
-
-// (g+o*31+v*31*31..)

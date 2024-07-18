@@ -1,4 +1,4 @@
-import { addUserError } from "../error.js"
+import { addError } from "../error.js";
 import Video from "../models/Video.js";
 
 
@@ -18,7 +18,7 @@ export const updateVideo = async (req,res,next)=> {
     try{
         const video = await Video.findById(req.params.id)
 
-        if(!video) return next(addUserError(404,"Video not found to update!"))
+        if(!video) return next(addError(404,"Video not found to update!"))
 
         if(req.user.id === video.userId)
         {
@@ -34,7 +34,7 @@ export const updateVideo = async (req,res,next)=> {
         }
         else
         {
-            return next(addUserError(403,"You can update others video"));
+            return next(addError(403,"You can update others video"));
         }
         
     }catch(err)
@@ -46,7 +46,7 @@ export const updateVideo = async (req,res,next)=> {
 export const getVideo = async (req,res,next)=> {
     try{
         const video = await Video.findById(req.params.id);
-        if(!video) return next(addUserError(404,"Video not found!"))
+        if(!video) return next(addError(404,"Video not found!"))
 
         res.status(200).json(video);
     }catch(err)
@@ -72,7 +72,7 @@ export const deleteVideo = async (req,res,next)=> {
         
         const video =  await Video.findById(req.params.id);
         if(!video) {
-            return next(addUserError(404,"Video is not present"));
+            return next(addError(404,"Video is not present"));
         }
 
         if(req.user.id === video.userId)
@@ -82,7 +82,7 @@ export const deleteVideo = async (req,res,next)=> {
         }
         else
         {
-            return next(addUserError(403,"Other users video cannot be deleted"));
+            return next(addError(403,"Other users video cannot be deleted"));
         }
 
     }catch(err)

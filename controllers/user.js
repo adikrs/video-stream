@@ -1,4 +1,4 @@
-import { addUserError } from "../error.js"
+import {addError} from "../error.js"
 import User from "../models/User.js";
 
 export const updateUser = async (req,res,next)=> {
@@ -21,7 +21,7 @@ export const updateUser = async (req,res,next)=> {
 
     }else{
         console.log("heress ");
-        return next(addUserError(403,"You are not allowed to update other accounts!"));
+        return next(addError(403,"You are not allowed to update other accounts!"));
     }
 }
 
@@ -41,7 +41,7 @@ export const deleteUser = async (req,res,next)=> {
 
     }else{
         console.log("heress ");
-        return next(addUserError(403,"You are not allowed to delete other accounts!"));
+        return next(addError(403,"You are not allowed to delete other accounts!"));
     }
 }
 
@@ -87,7 +87,3 @@ export const unsubscribe = async (req,res,next)=> {
         next(err)
     }
 }
-
-
-
-
