@@ -46,10 +46,11 @@ export const login = async (req,res,next)=> {
             console.log("User sign it successfull")
 
             const jwtToken = jwt.sign({id:user._id},process.env.JWT);
+            const {password,...others} = user._doc
 
             res.cookie("access_token",jwtToken,{
                 httpOnly:true
-            }).status(200).json(user);
+            }).status(200).json(others);
 
 
     
