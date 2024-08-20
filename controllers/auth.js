@@ -7,7 +7,7 @@ import { addError } from "../error.js";
 export const signup = async (req,res,next)=> {
 try{
         // console.log('Sign up');
-        // console.log(req.body);
+        console.log(req.body);
         const hash = bcrypt.hashSync(req.body.password, 10);
  
         const newUser = new User({...req.body,password:hash});
